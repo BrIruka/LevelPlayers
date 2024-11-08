@@ -1,5 +1,5 @@
 
- ║              LevelPlayers v1.0                 ║
+ ║              LevelPlayers                 ║
  ║            Создано: OwlStudio                  ║
 
 
