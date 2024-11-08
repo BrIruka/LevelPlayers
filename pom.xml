@@ -6,7 +6,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>LevelPlayers</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
 
     <name>LevelPlayers</name>
     <description>A plugin for managing player levels</description>

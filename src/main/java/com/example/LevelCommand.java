@@ -20,24 +20,28 @@ public class LevelCommand implements CommandExecutor {
             sender.sendMessage(getMessage("usage.set"));
             return true;
         }
-
+    
         if (!sender.hasPermission("levelplayers.set")) {
             sender.sendMessage(getMessage("no-permission"));
             return true;
         }
-
+    
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
             sender.sendMessage(getMessage("player-not-found"));
             return true;
         }
-
+    
         try {
             int level = Integer.parseInt(args[1]);
-            if (level < 1 || level > 5) {
-                sender.sendMessage(getMessage("invalid-level"));
+            int maxLevel = plugin.getMaxLevel();
+            
+            if (level < 1 || level > maxLevel) {
+                sender.sendMessage(getMessage("invalid-level")
+                    .replace("%max%", String.valueOf(maxLevel)));
                 return true;
             }
+    
             plugin.setPlayerLevel(target, level);
             sender.sendMessage(getMessage("level-set")
                     .replace("%player%", target.getName())

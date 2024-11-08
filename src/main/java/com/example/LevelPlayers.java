@@ -19,6 +19,8 @@ public class LevelPlayers extends JavaPlugin {
     private File playerDataFile;
     private FileConfiguration playerData;
     private FileConfiguration config;
+    private int maxLevel;
+    private String defaultFormat;
 
     @Override
     public void onEnable() {
@@ -28,6 +30,7 @@ public class LevelPlayers extends JavaPlugin {
         saveDefaultConfig();
         config = getConfig();
         loadPlayerData();
+        loadLevelSettings();
         
         // Проверяем версию сервера
         String version = Bukkit.getBukkitVersion().split("-")[0];
@@ -107,13 +110,26 @@ public class LevelPlayers extends JavaPlugin {
         }
     }
 
+    private void loadLevelSettings() {
+        maxLevel = config.getInt("level-settings.max-level", 5);
+        defaultFormat = config.getString("level-settings.format", "&7Уровень &6%level%");
+    }
+
 
     public static LevelPlayers getInstance() {
         return instance;
     }
 
     public String getLevelDisplay(int level) {
-        return config.getString("levels." + level, "&7Уровень &6" + level);
+        // Получаем кастомный формат для уровня, если он существует
+        String format = config.getString("levels." + level);
+        
+        // Если кастомного формата нет, используем формат по умолчанию
+        if (format == null) {
+            format = defaultFormat.replace("%level%", String.valueOf(level));
+        }
+        
+        return ChatColor.translateAlternateColorCodes('&', format);
     }
 
     public int getPlayerLevel(Player player) {
@@ -121,7 +137,7 @@ public class LevelPlayers extends JavaPlugin {
     }
 
     public void setPlayerLevel(Player player, int level) {
-        if (level >= 1 && level <= 5) {
+        if (level >= 1 && level <= maxLevel) {
             playerLevels.put(player.getUniqueId(), level);
             savePlayerData();
         }
@@ -137,11 +153,17 @@ public class LevelPlayers extends JavaPlugin {
             getConfig().getString("messages.prefix", "&8[&6LevelPlayers&8] ") +
             getConfig().getString("messages." + path, "Сообщение не найдено: " + path));
     }
-    // Добавляем метод для перезагрузки плагина
+
+    public int getMaxLevel() {
+        return maxLevel;
+    }
+
+    // Метод для перезагрузки плагина
     public void reloadPlugin() {
         // Перезагружаем конфиг
         reloadConfig();
         config = getConfig();
+        loadLevelSettings();
         loadPlayerData();
         
         // Перерегистрируем PlaceholderAPI расширение

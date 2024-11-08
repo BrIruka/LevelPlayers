@@ -3,13 +3,19 @@
 # Version: ${project.version}
 # Placeholder на отображение уровня %levelplayers_level%
 
-# Настройки уровней
+# Настройки системы уровней
+level-settings:
+  max-level: 5  # Максимальный уровень
+  format: "&7Уровень &6%level%" #Формат по умолчанию для ненастроенных уровней
+
 levels:
   1: "&7Уровень &6I"
   2: "&7Уровень &6II"
   3: "&7Уровень &6III"
   4: "&7Уровень &6IV"
   5: "&7Уровень &6V"
+# Можно добавлять больше уровней, если max-level больше 5
+
 
 # Настройки сообщений
 messages:
@@ -18,7 +24,7 @@ messages:
   player-not-found: "&cИгрок не найден!"
   level-set: "&aУровень игрока %player% установлен на %level%"
   level-set-target: "&aВаш уровень установлен на %level%"
-  invalid-level: "&cУровень должен быть от 1 до 5!"
+  invalid-level: "&cУровень должен быть от 1 до %max%!"
   invalid-number: "&cУровень должен быть числом!"
   usage:
     set: "&cИспользование: /level <игрок> <уровень>"
