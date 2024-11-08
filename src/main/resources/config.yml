@@ -1,0 +1,26 @@
+# LevelPlayers
+# Author: OwlStudio
+# Version: ${project.version}
+# Placeholder на отображение уровня %levelplayers_level%
+
+# Настройки уровней
+levels:
+  1: "&7Уровень &6I"
+  2: "&7Уровень &6II"
+  3: "&7Уровень &6III"
+  4: "&7Уровень &6IV"
+  5: "&7Уровень &6V"
+
+# Настройки сообщений
+messages:
+  prefix: "&8[&6LevelPlayers by OwlStudio&8] "
+  no-permission: "&cУ вас нет прав на эту команду!"
+  player-not-found: "&cИгрок не найден!"
+  level-set: "&aУровень игрока %player% установлен на %level%"
+  level-set-target: "&aВаш уровень установлен на %level%"
+  invalid-level: "&cУровень должен быть от 1 до 5!"
+  invalid-number: "&cУровень должен быть числом!"
+  usage:
+    set: "&cИспользование: /level <игрок> <уровень>"
+    reload: "&cИспользование: /levelplayers reload"
+  reload-success: "&aПлагин успешно перезагружен!"

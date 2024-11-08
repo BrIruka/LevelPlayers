@@ -1,0 +1,26 @@
+name: LevelPlayers
+version: '1.0-SNAPSHOT'
+main: com.example.LevelPlayers
+api-version: '1.18'
+description: Плагин для управления уровнями игроков
+author: OwlStudio
+website: https://t.me/owlstudio_bot
+depend: [PlaceholderAPI]
+
+commands:
+  level:
+    description: Установить уровень игрока
+    usage: /<command> <игрок> <уровень>
+    aliases: [lvl]
+  levelplayers:
+    description: Команды управления плагином
+    usage: /<command> reload
+    aliases: [lp]
+
+permissions:
+  levelplayers.set:
+    description: Позволяет устанавливать уровни игрокам
+    default: op
+  levelplayers.reload:
+    description: Позволяет перезагружать плагин
+    default: op
