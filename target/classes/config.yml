@@ -1,32 +1,21 @@
 # LevelPlayers
 # Author: OwlStudio
-# Version: 1.2-SNAPSHOT
-# Placeholder на отображение уровня %levelplayers_level%
+# Version: 1.3-SNAPSHOT
+# Placeholder to display level %levelplayers_level%
+# Placeholder to display specific level %levelplayers_level_<level>%
 
-# Настройки системы уровней
+# Basic settings
+settings:
+  language: "English" # Available languages: English, Russian, Ukrainian, Polish, Chinese, French, Spanish
+
+# Level system settings
 level-settings:
-  max-level: 5  # Максимальный уровень
-  format: "&7Уровень &6%level%" #Формат по умолчанию для ненастроенных уровней
-
+  max-level: 5  # Maximum level
+  format: "&7Level &6%level%" # Default format for unconfigured levels
+  
 levels:
-  1: "&7Уровень &6I"
-  2: "&7Уровень &6II"
-  3: "&7Уровень &6III"
-  4: "&7Уровень &6IV"
-  5: "&7Уровень &6V"
-# Можно добавлять больше уровней, если max-level больше 5
-
-
-# Настройки сообщений
-messages:
-  prefix: "&8[&6LevelPlayers by OwlStudio&8] "
-  no-permission: "&cУ вас нет прав на эту команду!"
-  player-not-found: "&cИгрок не найден!"
-  level-set: "&aУровень игрока %player% установлен на %level%"
-  level-set-target: "&aВаш уровень установлен на %level%"
-  invalid-level: "&cУровень должен быть от 1 до %max%!"
-  invalid-number: "&cУровень должен быть числом!"
-  usage:
-    set: "&cИспользование: /level <игрок> <уровень>"
-    reload: "&cИспользование: /levelplayers reload"
-  reload-success: "&aПлагин успешно перезагружен!"
+  1: "&7Level &6I"
+  2: "&7Level &6II"
+  3: "&7Level &6III"
+  4: "&7Level &6IV"
+  5: "&7Level &6V"

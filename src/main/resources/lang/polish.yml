@@ -1,0 +1,11 @@
+prefix: "&8[&6LevelPlayers&8] "
+no-permission: "&cNie masz uprawnień do tej komendy!"
+player-not-found: "&cNie znaleziono gracza!"
+level-set: "&aPoziom gracza %player% został ustawiony na %level%"
+level-set-target: "&aTwój poziom został ustawiony na %level%"
+invalid-level: "&cPoziom musi być między 1 a %max%!"
+invalid-number: "&cPoziom musi być liczbą!"
+usage:
+  set: "&cUżycie: /level <gracz> <poziom>"
+  reload: "&cUżycie: /levelplayers reload"
+reload-success: "&aPlugin został pomyślnie przeładowany!"

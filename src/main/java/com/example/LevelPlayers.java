@@ -21,6 +21,7 @@ public class LevelPlayers extends JavaPlugin {
     private FileConfiguration config;
     private int maxLevel;
     private String defaultFormat;
+    private LanguageManager languageManager;
 
     @Override
     public void onEnable() {
@@ -29,6 +30,13 @@ public class LevelPlayers extends JavaPlugin {
 
         saveDefaultConfig();
         config = getConfig();
+
+        File langFolder = new File(getDataFolder(), "lang");
+        if (!langFolder.exists()) {
+            langFolder.mkdirs();
+        }
+
+        languageManager = new LanguageManager(this);
         loadPlayerData();
         loadLevelSettings();
         
@@ -144,14 +152,11 @@ public class LevelPlayers extends JavaPlugin {
     }
 
     public String getMessage(String path) {
-        return ChatColor.translateAlternateColorCodes('&',
-                getConfig().getString("messages." + path, "Сообщение не найдено: " + path));
+        return languageManager.getMessage(path);
     }
 
     public String getMessageWithPrefix(String path) {
-        return ChatColor.translateAlternateColorCodes('&',
-            getConfig().getString("messages.prefix", "&8[&6LevelPlayers&8] ") +
-            getConfig().getString("messages." + path, "Сообщение не найдено: " + path));
+        return languageManager.getMessageWithPrefix(path);
     }
 
     public int getMaxLevel() {
@@ -163,6 +168,7 @@ public class LevelPlayers extends JavaPlugin {
         // Перезагружаем конфиг
         reloadConfig();
         config = getConfig();
+        languageManager.loadLanguage();
         loadLevelSettings();
         loadPlayerData();
         

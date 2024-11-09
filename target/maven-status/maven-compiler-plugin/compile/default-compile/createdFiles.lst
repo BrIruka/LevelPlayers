@@ -1,5 +1,6 @@
+com\example\LevelPlayersExpansion.class
+com\example\LevelPlayers.class
+com\example\LanguageManager.class
 com\example\LevelCommand.class
 com\example\LevelPlayersCommand.class
-com\example\LevelPlayersExpansion.class
 com\example\App.class
-com\example\LevelPlayers.class

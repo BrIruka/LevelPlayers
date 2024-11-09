@@ -43,6 +43,16 @@ public class LevelPlayersExpansion extends PlaceholderExpansion {
             return plugin.getLevelDisplay(level);
         }
 
+        // Плейсхолдер %levelplayers_level_<уровень>%
+        if (identifier.startsWith("level_")) {
+            try {
+                int level = Integer.parseInt(identifier.substring(6));
+                return plugin.getLevelDisplay(level);
+            } catch (NumberFormatException e) {
+                return "";
+            }
+        }
+
         return null;
     }
 

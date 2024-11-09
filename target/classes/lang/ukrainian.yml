@@ -1,0 +1,11 @@
+prefix: "&8[&6LevelPlayers&8] "
+no-permission: "&cУ вас немає прав на цю команду!"
+player-not-found: "&cГравець не знайдений!"
+level-set: "&aРівень гравця %player% встановлено на %level%"
+level-set-target: "&aВаш рівень встановлено на %level%"
+invalid-level: "&cРівень повинен бути від 1 до %max%!"
+invalid-number: "&cРівень повинен бути числом!"
+usage:
+  set: "&cВикористання: /level <гравець> <рівень>"
+  reload: "&cВикористання: /levelplayers reload"
+reload-success: "&aПлагін успішно перезавантажено!"

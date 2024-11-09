@@ -1,0 +1,11 @@
+prefix: "&8[&6LevelPlayers&8] "
+no-permission: "&c你没有权限使用此命令！"
+player-not-found: "&c找不到玩家！"
+level-set: "&a已将玩家 %player% 的等级设置为 %level%"
+level-set-target: "&a你的等级已设置为 %level%"
+invalid-level: "&c等级必须在1到%max%之间！"
+invalid-number: "&c等级必须是数字！"
+usage:
+  set: "&c用法：/level <玩家> <等级>"
+  reload: "&c用法：/levelplayers reload"
+reload-success: "&a插件已成功重新加载！"
