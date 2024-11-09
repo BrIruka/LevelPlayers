@@ -1,7 +1,6 @@
 package com.example;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,18 +16,18 @@ public class LevelCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length != 2) {
-            sender.sendMessage(getMessage("usage.set"));
+            sender.sendMessage(plugin.getMessageWithPrefix("usage.set"));
             return true;
         }
     
         if (!sender.hasPermission("levelplayers.set")) {
-            sender.sendMessage(getMessage("no-permission"));
+            sender.sendMessage(plugin.getMessageWithPrefix("no-permission"));
             return true;
         }
     
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
-            sender.sendMessage(getMessage("player-not-found"));
+            sender.sendMessage(plugin.getMessageWithPrefix("player-not-found"));
             return true;
         }
     
@@ -37,26 +36,20 @@ public class LevelCommand implements CommandExecutor {
             int maxLevel = plugin.getMaxLevel();
             
             if (level < 1 || level > maxLevel) {
-                sender.sendMessage(getMessage("invalid-level")
+                sender.sendMessage(plugin.getMessageWithPrefix("invalid-level")
                     .replace("%max%", String.valueOf(maxLevel)));
                 return true;
             }
     
             plugin.setPlayerLevel(target, level);
-            sender.sendMessage(getMessage("level-set")
+            sender.sendMessage(plugin.getMessageWithPrefix("level-set")
                     .replace("%player%", target.getName())
                     .replace("%level%", String.valueOf(level)));
-            target.sendMessage(getMessage("level-set-target")
+            target.sendMessage(plugin.getMessageWithPrefix("level-set-target")
                     .replace("%level%", String.valueOf(level)));
         } catch (NumberFormatException e) {
-            sender.sendMessage(getMessage("invalid-number"));
+            sender.sendMessage(plugin.getMessageWithPrefix("invalid-number"));
         }
         return true;
-    }
-
-    private String getMessage(String path) {
-        return ChatColor.translateAlternateColorCodes('&', 
-            plugin.getConfig().getString("messages.prefix", "&8[&6LevelPlayers&8] ") + 
-            plugin.getConfig().getString("messages." + path, "&cСообщение не найдено: " + path));
     }
 }
