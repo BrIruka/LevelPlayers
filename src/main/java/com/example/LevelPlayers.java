@@ -3,8 +3,12 @@ package com.example;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -12,16 +16,18 @@ import java.util.UUID;
 public class LevelPlayers extends JavaPlugin {
     private static LevelPlayers instance;
     private Map<UUID, Integer> playerLevels;
+    private File playerDataFile;
+    private FileConfiguration playerData;
     private FileConfiguration config;
 
     @Override
     public void onEnable() {
         instance = this;
         playerLevels = new HashMap<>();
-        
-        // Сохраняем конфиг по умолчанию
+
         saveDefaultConfig();
         config = getConfig();
+        loadPlayerData();
         
         // Проверяем версию сервера
         String version = Bukkit.getBukkitVersion().split("-")[0];
@@ -52,6 +58,7 @@ public class LevelPlayers extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        savePlayerData();
         Bukkit.getConsoleSender().sendMessage("§6╔════════════════════════════════════");
         Bukkit.getConsoleSender().sendMessage("§6║ §fLevelPlayers §7v" + getDescription().getVersion());
         Bukkit.getConsoleSender().sendMessage("§6║ §7Status: §cDisabled");
@@ -64,6 +71,42 @@ public class LevelPlayers extends JavaPlugin {
         int minor = Integer.parseInt(versionParts[1]);
         return major == 1 && minor >= 18 && minor <= 21;
     }
+
+    private void loadPlayerData() {
+        playerDataFile = new File(getDataFolder(), "playerdata.yml");
+        if (!playerDataFile.exists()) {
+            saveResource("playerdata.yml", false);
+        }
+        playerData = YamlConfiguration.loadConfiguration(playerDataFile);
+
+        // Загружаем данные игроков
+        if (playerData.contains("players")) {
+            for (String uuidString : playerData.getConfigurationSection("players").getKeys(false)) {
+                UUID uuid = UUID.fromString(uuidString);
+                int level = playerData.getInt("players." + uuidString);
+                playerLevels.put(uuid, level);
+            }
+        }
+    }
+
+    private void savePlayerData() {
+        try {
+            // Очищаем старые данные
+            playerData.set("players", null);
+
+            // Сохраняем текущие данные
+            for (Map.Entry<UUID, Integer> entry : playerLevels.entrySet()) {
+                playerData.set("players." + entry.getKey().toString(), entry.getValue());
+            }
+
+            // Сохраняем файл
+            playerData.save(playerDataFile);
+        } catch (IOException e) {
+            getLogger().severe("Не удалось сохранить данные игроков!");
+            e.printStackTrace();
+        }
+    }
+
 
     public static LevelPlayers getInstance() {
         return instance;
@@ -80,6 +123,7 @@ public class LevelPlayers extends JavaPlugin {
     public void setPlayerLevel(Player player, int level) {
         if (level >= 1 && level <= 5) {
             playerLevels.put(player.getUniqueId(), level);
+            savePlayerData();
         }
     }
 
@@ -98,6 +142,7 @@ public class LevelPlayers extends JavaPlugin {
         // Перезагружаем конфиг
         reloadConfig();
         config = getConfig();
+        loadPlayerData();
         
         // Перерегистрируем PlaceholderAPI расширение
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
