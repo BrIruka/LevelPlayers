@@ -40,12 +40,6 @@
 
  • /levelplayers reload - перезагрузить конфигурацию
 
- ▸ PlaceholderAPI:
-
- • %levelplayers_level% - показывает текущий уровень игрока
-
- • %levelplayers_level_X% - показывает формат конкретного уровня X
-
  ▸ Права плагина:
  
  • levelplayers.set - право на установку уровня
@@ -57,5 +51,9 @@
  • levelplayers.reload - право на перезагрузку плагина
  
 
- ▸ PlaceholderAPI: %levelplayers_level%
+ ▸ PlaceholderAPI:
+
+ • %levelplayers_level% - показывает текущий уровень игрока
+
+ • %levelplayers_level_X% - показывает формат конкретного уровня X
  
