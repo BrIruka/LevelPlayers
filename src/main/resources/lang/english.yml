@@ -1,11 +1,30 @@
 prefix: "&8[&6LevelPlayers&8] "
-no-permission: "&cYou don't have permission to use this command!"
+no-permission: "&cYou don't have permission for this command!"
 player-not-found: "&cPlayer not found!"
-level-set: "&aPlayer %player%'s level has been set to %level%"
-level-set-target: "&aYour level has been set to %level%"
+
 invalid-level: "&cLevel must be between 1 and %max%!"
 invalid-number: "&cLevel must be a number!"
+
+level-set: "&aPlayer %player%'s level has been set to %level%"
+level-set-target: "&aYour level has been set to %level%"
+level-increased: "&aPlayer %player%'s level increased to %level%"
+level-increased-target: "&aYour level increased to %level%"
+level-decreased: "&aPlayer %player%'s level decreased to %level%"
+level-decreased-target: "&aYour level decreased to %level%"
+max-level-reached: "&cPlayer already has maximum level!"
+min-level-reached: "&cPlayer already has minimum level!"
+
 usage:
-  set: "&cUsage: /level <player> <level>"
+  set: "&cUsage: /level <player> <level> or /level give|take <player>"
   reload: "&cUsage: /levelplayers reload"
 reload-success: "&aPlugin successfully reloaded!"
+
+help:
+  header: "&6=== &fLevelPlayers &7v%version% &6==="
+  footer: "&6=========================="
+  commands:
+    help: "&6/level help &7- Show this help menu"
+    set: "&6/level <player> <level> &7- Set player's level"
+    give: "&6/level give <player> &7- Increase player's level"
+    take: "&6/level take <player> &7- Decrease player's level"
+    reload: "&6/levelplayers reload &7- Reload the plugin"

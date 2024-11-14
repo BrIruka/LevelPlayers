@@ -1,11 +1,30 @@
 prefix: "&8[&6LevelPlayers&8] "
 no-permission: "&c你没有权限使用此命令！"
-player-not-found: "&c找不到玩家！"
-level-set: "&a已将玩家 %player% 的等级设置为 %level%"
-level-set-target: "&a你的等级已设置为 %level%"
+player-not-found: "&c未找到玩家！"
+
 invalid-level: "&c等级必须在1到%max%之间！"
-invalid-number: "&c等级必须是数字！"
+invalid-number: "&c等级必须是一个数字！"
+
+level-set: "&a已将玩家%player%的等级设置为%level%"
+level-set-target: "&a你的等级已被设置为%level%"
+level-increased: "&a玩家%player%的等级提升至%level%"
+level-increased-target: "&a你的等级提升至%level%"
+level-decreased: "&a玩家%player%的等级降低至%level%"
+level-decreased-target: "&a你的等级降低至%level%"
+max-level-reached: "&c玩家已达到最高等级！"
+min-level-reached: "&c玩家已达到最低等级！"
+
 usage:
-  set: "&c用法：/level <玩家> <等级>"
+  set: "&c用法：/level <玩家> <等级> 或 /level give|take <玩家>"
   reload: "&c用法：/levelplayers reload"
-reload-success: "&a插件已成功重新加载！"
+reload-success: "&a插件重载成功！"
+
+help:
+  header: "&6=== &fLevelPlayers &7v%version% &6==="
+  footer: "&6=========================="
+  commands:
+    help: "&6/level help &7- 显示此帮助菜单"
+    set: "&6/level <玩家> <等级> &7- 设置玩家等级"
+    give: "&6/level give <玩家> &7- 提升玩家等级"
+    take: "&6/level take <玩家> &7- 降低玩家等级"
+    reload: "&6/levelplayers reload &7- 重载插件"

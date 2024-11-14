@@ -64,7 +64,10 @@ public class LevelPlayers extends JavaPlugin {
 
         // Регистрируем команды
         getCommand("level").setExecutor(new LevelCommand(this));
+        getCommand("level").setTabCompleter(new LevelCommandTabCompleter(this));
+
         getCommand("levelplayers").setExecutor(new LevelPlayersCommand(this));
+        getCommand("levelplayers").setTabCompleter(new LevelPlayersCommandTabCompleter());
     }
 
     @Override

@@ -1,11 +1,30 @@
 prefix: "&8[&6LevelPlayers&8] "
 no-permission: "&cУ вас немає прав на цю команду!"
-player-not-found: "&cГравець не знайдений!"
+player-not-found: "&cГравця не знайдено!"
+
+invalid-level: "&cРівень має бути від 1 до %max%!"
+invalid-number: "&cРівень має бути числом!"
+
 level-set: "&aРівень гравця %player% встановлено на %level%"
 level-set-target: "&aВаш рівень встановлено на %level%"
-invalid-level: "&cРівень повинен бути від 1 до %max%!"
-invalid-number: "&cРівень повинен бути числом!"
+level-increased: "&aРівень гравця %player% підвищено до %level%"
+level-increased-target: "&aВаш рівень підвищено до %level%"
+level-decreased: "&aРівень гравця %player% знижено до %level%"
+level-decreased-target: "&aВаш рівень знижено до %level%"
+max-level-reached: "&cГравець вже має максимальний рівень!"
+min-level-reached: "&cГравець вже має мінімальний рівень!"
+
 usage:
-  set: "&cВикористання: /level <гравець> <рівень>"
+  set: "&cВикористання: /level <гравець> <рівень> або /level give|take <гравець>"
   reload: "&cВикористання: /levelplayers reload"
 reload-success: "&aПлагін успішно перезавантажено!"
+
+help:
+  header: "&6=== &fLevelPlayers &7v%version% &6==="
+  footer: "&6=========================="
+  commands:
+    help: "&6/level help &7- Показати це меню допомоги"
+    set: "&6/level <гравець> <рівень> &7- Встановити рівень гравцю"
+    give: "&6/level give <гравець> &7- Підвищити рівень гравця"
+    take: "&6/level take <гравець> &7- Знизити рівень гравця"
+    reload: "&6/levelplayers reload &7- Перезавантажити плагін"

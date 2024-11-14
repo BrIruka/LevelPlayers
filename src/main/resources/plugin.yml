@@ -24,3 +24,9 @@ permissions:
   levelplayers.reload:
     description: Позволяет перезагружать плагин
     default: op
+  levelplayers.give:
+    description: Позволяет повышать уровень игрока
+    default: op
+  levelplayers.take:
+    description: Позволяет понижать уровень игрока
+    default: op

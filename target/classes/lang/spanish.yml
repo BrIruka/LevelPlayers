@@ -1,11 +1,30 @@
 prefix: "&8[&6LevelPlayers&8] "
 no-permission: "&c¡No tienes permiso para usar este comando!"
 player-not-found: "&c¡Jugador no encontrado!"
-level-set: "&aEl nivel de %player% ha sido establecido a %level%"
-level-set-target: "&aTu nivel ha sido establecido a %level%"
+
 invalid-level: "&c¡El nivel debe estar entre 1 y %max%!"
 invalid-number: "&c¡El nivel debe ser un número!"
+
+level-set: "&aNivel del jugador %player% establecido a %level%"
+level-set-target: "&aTu nivel ha sido establecido a %level%"
+level-increased: "&aNivel del jugador %player% aumentado a %level%"
+level-increased-target: "&aTu nivel ha aumentado a %level%"
+level-decreased: "&aNivel del jugador %player% reducido a %level%"
+level-decreased-target: "&aTu nivel ha sido reducido a %level%"
+max-level-reached: "&c¡El jugador ya tiene el nivel máximo!"
+min-level-reached: "&c¡El jugador ya tiene el nivel mínimo!"
+
 usage:
-  set: "&cUso: /level <jugador> <nivel>"
+  set: "&cUso: /level <jugador> <nivel> o /level give|take <jugador>"
   reload: "&cUso: /levelplayers reload"
-reload-success: "&a¡Plugin recargado exitosamente!"
+reload-success: "&a¡Plugin recargado con éxito!"
+
+help:
+  header: "&6=== &fLevelPlayers &7v%version% &6==="
+  footer: "&6=========================="
+  commands:
+    help: "&6/level help &7- Mostrar este menú de ayuda"
+    set: "&6/level <jugador> <nivel> &7- Establecer nivel de un jugador"
+    give: "&6/level give <jugador> &7- Aumentar nivel de un jugador"
+    take: "&6/level take <jugador> &7- Reducir nivel de un jugador"
+    reload: "&6/levelplayers reload &7- Recargar el plugin"
