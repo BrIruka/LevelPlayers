@@ -39,6 +39,7 @@
  • /level <игрок> <уровень> - установить уровень игроку
 
  • /levelplayers reload - перезагрузить конфигурацию
+
  ▸ PlaceholderAPI:
 
  • %levelplayers_level% - показывает текущий уровень игрока
