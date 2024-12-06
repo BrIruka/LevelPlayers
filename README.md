@@ -3,7 +3,7 @@
 </p>
 <p align="center">
  ║              LevelPlayers                 ║
- ║            Создано: OwlStudio                  ║
+ ║            Создано: IrukaMine                  ║
 </p>
 
 <p align="center">
