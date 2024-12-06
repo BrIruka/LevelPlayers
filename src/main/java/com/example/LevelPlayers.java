@@ -58,7 +58,7 @@ public class LevelPlayers extends JavaPlugin {
         // Красивое сообщение о запуске
         Bukkit.getConsoleSender().sendMessage("§6╔════════════════════════════════════");
         Bukkit.getConsoleSender().sendMessage("§6║ §fLevelPlayers §7v" + getDescription().getVersion());
-        Bukkit.getConsoleSender().sendMessage("§6║ §7Author: §fOwlStudio");
+        Bukkit.getConsoleSender().sendMessage("§6║ §7Author: §fIrukaMine");
         Bukkit.getConsoleSender().sendMessage("§6║ §7Status: §aEnabled");
         Bukkit.getConsoleSender().sendMessage("§6╚════════════════════════════════════");
 
