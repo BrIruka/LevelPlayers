@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.database.DatabaseManager;
+import com.example.utils.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -16,6 +18,8 @@ import java.util.UUID;
 public class LevelPlayers extends JavaPlugin {
     private static LevelPlayers instance;
     private Map<UUID, Integer> playerLevels;
+    private DatabaseManager databaseManager;
+    private boolean useDatabase;
     private File playerDataFile;
     private FileConfiguration playerData;
     private FileConfiguration config;
@@ -31,13 +35,21 @@ public class LevelPlayers extends JavaPlugin {
         saveDefaultConfig();
         config = getConfig();
 
+        useDatabase = config.getBoolean("database.enabled", true);
+
+        if (useDatabase) {
+            databaseManager = new DatabaseManager(this);
+            playerLevels = databaseManager.getAllPlayerLevels();
+        } else {
+            loadPlayerData(); // Старый метод загрузки из файла
+        }
+
         File langFolder = new File(getDataFolder(), "lang");
         if (!langFolder.exists()) {
             langFolder.mkdirs();
         }
 
         languageManager = new LanguageManager(this);
-        loadPlayerData();
         loadLevelSettings();
         
         // Проверяем версию сервера
@@ -72,7 +84,11 @@ public class LevelPlayers extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        savePlayerData();
+        if (useDatabase && databaseManager != null) {
+            databaseManager.close();
+        } else {
+            savePlayerData(); // Старый метод сохранения в файл
+        }
         Bukkit.getConsoleSender().sendMessage("§6╔════════════════════════════════════");
         Bukkit.getConsoleSender().sendMessage("§6║ §fLevelPlayers §7v" + getDescription().getVersion());
         Bukkit.getConsoleSender().sendMessage("§6║ §7Status: §cDisabled");
@@ -132,15 +148,13 @@ public class LevelPlayers extends JavaPlugin {
     }
 
     public String getLevelDisplay(int level) {
-        // Получаем кастомный формат для уровня, если он существует
         String format = config.getString("levels." + level);
-        
-        // Если кастомного формата нет, используем формат по умолчанию
+
         if (format == null) {
             format = defaultFormat.replace("%level%", String.valueOf(level));
         }
-        
-        return ChatColor.translateAlternateColorCodes('&', format);
+
+        return ColorUtils.colorize(format);
     }
 
     public int getPlayerLevel(Player player) {
@@ -148,9 +162,23 @@ public class LevelPlayers extends JavaPlugin {
     }
 
     public void setPlayerLevel(Player player, int level) {
+        if (player == null) return;
+
         if (level >= 1 && level <= maxLevel) {
-            playerLevels.put(player.getUniqueId(), level);
-            savePlayerData();
+            UUID uuid = player.getUniqueId();
+            playerLevels.put(uuid, level);
+
+            if (useDatabase) {
+                if (databaseManager != null) {
+                    // Асинхронное сохранение в БД
+                    Bukkit.getScheduler().runTaskAsynchronously(this, () ->
+                            databaseManager.setPlayerLevel(uuid, level));
+                } else {
+                    getLogger().warning("DatabaseManager is null but database storage is enabled!");
+                }
+            } else {
+                savePlayerData();
+            }
         }
     }
 
@@ -168,19 +196,48 @@ public class LevelPlayers extends JavaPlugin {
 
     // Метод для перезагрузки плагина
     public void reloadPlugin() {
+        // Сохраняем текущие данные перед перезагрузкой
+        if (useDatabase && databaseManager != null) {
+            databaseManager.close();
+        } else {
+            savePlayerData();
+        }
+
         // Перезагружаем конфиг
         reloadConfig();
         config = getConfig();
+
+        // Проверяем новый режим хранения
+        boolean newDatabaseMode = config.getBoolean("database.enabled", true);
+
+        // Если режим хранения изменился
+        if (newDatabaseMode != useDatabase) {
+            useDatabase = newDatabaseMode;
+            if (useDatabase) {
+                databaseManager = new DatabaseManager(this);
+                playerLevels = databaseManager.getAllPlayerLevels();
+            } else {
+                if (databaseManager != null) {
+                    databaseManager.close();
+                    databaseManager = null;
+                }
+                loadPlayerData();
+            }
+        }
+
         languageManager.loadLanguage();
         loadLevelSettings();
-        loadPlayerData();
-        
+
         // Перерегистрируем PlaceholderAPI расширение
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new LevelPlayersExpansion(this).register();
         }
-        
+
         // Отправляем сообщение в консоль
         Bukkit.getConsoleSender().sendMessage("§6[LevelPlayers] §fПлагин перезагружен!");
+    }
+
+    public boolean isUsingDatabase() {
+        return useDatabase && databaseManager != null;
     }
 }

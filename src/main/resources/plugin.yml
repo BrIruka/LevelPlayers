@@ -3,8 +3,8 @@ version: '${project.version}'
 main: com.example.LevelPlayers
 api-version: '1.18'
 description: Плагин для управления уровнями игроков
-author: OwlStudio
-website: https://t.me/owlstudio_bot
+author: IrukaMine
+website: https://iruka-shop.site/
 depend: [PlaceholderAPI]
 
 commands:

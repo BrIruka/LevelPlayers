@@ -1,5 +1,5 @@
 # LevelPlayers
-# Author: OwlStudio
+# Author: IrukaMine
 # Version: ${project.version}
 # Placeholder to display level %levelplayers_level%
 # Placeholder to display specific level %levelplayers_level_<level>%
@@ -7,6 +7,10 @@
 # Basic settings
 settings:
   language: "English" # Available languages: English, Russian, Ukrainian, Polish, Chinese, French, Spanish
+
+# Database settings
+database:
+  enabled: true  # If false, will use YAML file storage instead of SQLite
 
 # Level system settings
 level-settings:
@@ -19,3 +23,4 @@ levels:
   3: "&7Level &6III"
   4: "&7Level &6IV"
   5: "&7Level &6V"
+  #...

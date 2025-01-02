@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.utils.ColorUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -62,7 +63,7 @@ public class LanguageManager {
         if (message == null) {
             return "Message not found: " + path;
         }
-        return ChatColor.translateAlternateColorCodes('&', message);
+        return ColorUtils.colorize(message);
     }
 
     public String getMessageWithPrefix(String path) {
